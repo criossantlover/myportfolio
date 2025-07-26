@@ -170,6 +170,15 @@
   </div>
 </div>
 
+<!-- Mobile Warning - Hidden by default -->
+<div id="mobileWarning" class="mobile-warning">
+  <div class="warning-content">
+    <img src="img/warning-icon.png" alt="!" width="32">
+    <p>For best experience, view on Desktop!</p>
+    <button onclick="closeWarning()">OK</button>
+  </div>
+</div>
+
 <footer>
   <div class="footer">
     <img src="img/window7.png" alt="Windows 7 Logo" title="Click to open menu">
@@ -446,6 +455,27 @@ window.addEventListener('resize', function() {
   if (window.innerWidth > 768 && startMenu.style.display === 'block') {
     startMenu.style.left = '';
     startMenu.style.transform = '';
+  }
+});
+
+// Add to your existing JS
+function checkMobile() {
+  if (window.innerWidth <= 768) {
+    document.getElementById('mobileWarning').style.display = 'block';
+  }
+}
+
+function closeWarning() {
+  document.getElementById('mobileWarning').style.display = 'none';
+  localStorage.setItem('hideMobileWarning', 'true');
+}
+
+// On load
+window.addEventListener('DOMContentLoaded', () => {
+  if (window.innerWidth <= 768 && !localStorage.getItem('hideMobileWarning')) {
+    setTimeout(() => {
+      document.getElementById('mobileWarning').style.display = 'block';
+    }, 3000);
   }
 });
 </script>
