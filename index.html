@@ -387,6 +387,7 @@ function initWindows() {
 function initStartMenu() {
   const startButton = document.querySelector('.footer img[src="img/window7.png"]');
   const startMenu = document.getElementById('startMenu');
+  
   if (!startButton || !startMenu) return;
 
   startButton.addEventListener('click', function(e) {
@@ -400,13 +401,20 @@ function initStartMenu() {
         startMenu.classList.remove('closing');
       }, 200);
     } else {
+      // Reset position before showing
+      startMenu.style.left = '';
+      startMenu.style.transform = '';
+      
+      if (window.innerWidth <= 768) {
+        startMenu.style.left = '50%';
+        startMenu.style.transform = 'translateX(-50%)';
+      }
+      
       startMenu.style.display = 'block';
       startMenu.style.zIndex = getHighestZIndex() + 1;
-      document.querySelectorAll('.window').forEach(win => {
-        win.style.display = 'none';
-      });
     }
   });
+}
 
   document.addEventListener('click', (e) => {
     if (!startMenu.contains(e.target) && !e.target.closest('.footer img[src="img/window7.png"]')) {
@@ -417,7 +425,7 @@ function initStartMenu() {
       }, 200);
     }
   });
-}
+
 
 // ========================
 // INTRO SCREEN SYSTEM
@@ -432,7 +440,14 @@ function initIntro() {
   }, 2000);
 }
 
-
+// Add to your existing JavaScript
+window.addEventListener('resize', function() {
+  const startMenu = document.getElementById('startMenu');
+  if (window.innerWidth > 768 && startMenu.style.display === 'block') {
+    startMenu.style.left = '';
+    startMenu.style.transform = '';
+  }
+});
 </script>
 </body>
 </html>
