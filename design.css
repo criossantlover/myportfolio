@@ -638,3 +638,18 @@ ul li:hover {
 .about-content {
   padding-top: 16px;
 }
+
+/* Mobile-specific Start Menu */
+@media (max-width: 768px) {
+  #startMenu {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    bottom: 60px !important;
+    width: 90vw !important;
+    max-width: 300px;
+  }
+  
+  .start-menu.closing {
+    transform: translateX(-50%) translateY(20px) !important;
+  }
+}
